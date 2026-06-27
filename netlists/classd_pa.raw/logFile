@@ -1,0 +1,34 @@
+HEADER
+"PSFversion" "1.00"
+"Log Generator" "drlLog rev. 1.0"
+"Log Time Stamp" "Sat Jun 27 18:56:03 2026"
+"simulator" "spectre"
+"version" "14.1.0.664.isr9"
+"date" "6:56:03 PM, Sat Jun 27, 2026"
+"design" "// Class-D RF Power Amplifier - 300W, 13.56 MHz"
+"signalNameType" "spectre"
+"measdgt" 0
+"ingold" 2
+"sst2usecolon" 0
+TYPE
+"analysisInst" STRUCT(
+"analysisType" STRING *
+"dataFile" STRING *
+"format" STRING *
+"parent" STRING *
+"sweepVariable" ARRAY ( * ) STRING *
+"description" STRING *
+)
+VALUE
+"tran-tran" "analysisInst" (
+"tran"
+"tran.tran"
+"PSF"
+""
+("time")
+"Transient Analysis `tran': time = (0 s -> 3 us)"
+) PROP(
+"data_type" "swept_scalar"
+)
+
+END

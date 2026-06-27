@@ -1,0 +1,153 @@
+
+Cadence (R) Virtuoso (R) Spectre (R) Circuit Simulator
+Version 14.1.0.664.isr9 64bit -- 6 Jun 2015
+Copyright (C) 1989-2015 Cadence Design Systems, Inc. All rights reserved worldwide. Cadence, Virtuoso and Spectre are registered trademarks of Cadence Design Systems, Inc. All others are the property of their respective holders.
+
+Includes RSA BSAFE(R) Cryptographic or Security Protocol Software from RSA Security, Inc.
+
+User: vickynishad   Host: MVP   HostID: 7F0101   PID: 19341
+Memory  available: 1.7103 GB  physical: 8.1728 GB
+CPU Type: 13th Gen Intel(R) Core(TM) i5-13450HX
+          Processor PhysicalID CoreID Frequency Load
+              0         0        0     2611.2    13.4
+              1         0        0     2611.2    17.6
+              2         0        1     2611.2    13.0
+              3         0        1     2611.2    15.0
+              4         0        2     2611.2    12.4
+              5         0        2     2611.2    12.5
+              6         0        3     2611.2    12.2
+              7         0        3     2611.2    13.0
+              8         0        4     2611.2    12.6
+              9         0        4     2611.2    13.1
+             10         0        5     2611.2    12.2
+             11         0        5     2611.2    13.2
+             12         0        6     2611.2    12.2
+             13         0        6     2611.2    12.6
+             14         0        7     2611.2    12.4
+             15         0        7     2611.2    13.8
+
+
+Simulating `netlists/classd_pa.scs' on MVP at 9:34:31 PM, Sat Jun 27, 2026 (process id: 19341).
+Current working directory: /home/vickynishad/ClassD_RF_PA_300W_13p56MHz
+Command line:
+    /opt/cadence/INVS152/tools.lnx86/bin/spectre -64 -64  \
+        netlists/classd_pa.scs -format nutascii -raw  \
+        results/classd_cbd2n4_zvs_ascii +escchars  \
+        =log=results/classd_cbd2n4_zvs.log
+
+Loading /opt/cadence/INVS152/tools.lnx86/cmi/lib/64bit/5.0/libinfineon_sh.so ...
+Loading /opt/cadence/INVS152/tools.lnx86/cmi/lib/64bit/5.0/libphilips_o_sh.so ...
+Loading /opt/cadence/INVS152/tools.lnx86/cmi/lib/64bit/5.0/libphilips_sh.so ...
+Loading /opt/cadence/INVS152/tools.lnx86/cmi/lib/64bit/5.0/libsparam_sh.so ...
+Loading /opt/cadence/INVS152/tools.lnx86/cmi/lib/64bit/5.0/libstmodels_sh.so ...
+Reading file:  /home/vickynishad/ClassD_RF_PA_300W_13p56MHz/netlists/classd_pa.scs
+Reading file:  /opt/cadence/INVS152/tools.lnx86/spectre/etc/configs/spectre.cfg
+Reading file:  /home/vickynishad/ClassD_RF_PA_300W_13p56MHz/models/irf540.mod
+Reading file:  /home/vickynishad/ClassD_RF_PA_300W_13p56MHz/models/simple_nmos.mod
+Time for NDB Parsing: CPU = 75.511 ms, elapsed = 75.454 ms.
+Time accumulated: CPU = 89.36 ms, elapsed = 75.46 ms.
+Peak resident memory used = 76.1 Mbytes.
+
+Reading link:  /opt/cadence/INVS152/tools.lnx86/spectre/etc/ahdl/discipline.h
+Reading file:  /opt/cadence/INVS152/tools.lnx86/spectre/etc/ahdl/disciplines.vams
+Reading link:  /opt/cadence/INVS152/tools.lnx86/spectre/etc/ahdl/constants.h
+Reading file:  /opt/cadence/INVS152/tools.lnx86/spectre/etc/ahdl/constants.vams
+Time for Elaboration: CPU = 12.207 ms, elapsed = 12.208 ms.
+Time accumulated: CPU = 101.621 ms, elapsed = 87.7209 ms.
+Peak resident memory used = 80.9 Mbytes.
+
+Time for EDB Visiting: CPU = 140 us, elapsed = 139.952 us.
+Time accumulated: CPU = 101.812 ms, elapsed = 87.9109 ms.
+Peak resident memory used = 81 Mbytes.
+
+
+Notice from spectre during initial setup.
+    simple_nmos: `cgso' is not specified.  0.1um * Cox is used.
+    simple_nmos: `cgdo' is not specified.  0.1um * Cox is used.
+
+Global user options:
+
+Circuit inventory:
+              nodes 6
+          capacitor 7     
+           inductor 1     
+               mos1 2     
+           resistor 1     
+            vsource 3     
+
+Analysis and control statement inventory:
+               tran 1     
+
+Output statements:
+             .probe 0     
+           .measure 0     
+               save 3     
+
+Time for parsing: CPU = 614 us, elapsed = 613.928 us.
+Time accumulated: CPU = 102.455 ms, elapsed = 88.5539 ms.
+Peak resident memory used = 82.2 Mbytes.
+
+~~~~~~~~~~~~~~~~~~~~~~
+Pre-Simulation Summary
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+
+***********************************************
+Transient Analysis `tran': time = (0 s -> 1 us)
+***********************************************
+DC simulation time: CPU = 249 us, elapsed = 248.909 us.
+Important parameter values:
+    start = 0 s
+    outputstart = 0 s
+    stop = 1 us
+    step = 1 ns
+    maxstep = 20 ns
+    ic = all
+    useprevic = no
+    skipdc = no
+    reltol = 1e-03
+    abstol(V) = 1 uV
+    abstol(I) = 1 pA
+    temp = 27 C
+    tnom = 27 C
+    tempeffects = all
+    errpreset = moderate
+    method = trap
+    lteratio = 3.5
+    relref = sigglobal
+    cmin = 0 F
+    gmin = 1 pS
+
+
+Output and IC/nodeset summary:
+                 save   4       (current)
+                 save   8       (voltage)
+
+......9......8......7......6......5......4......3......2......1......0
+Number of accepted tran steps =             1539
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Post-Transient Simulation Summary
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   -   Parasitics slow down simulation. To speed up, consider
+          add +parasitics on command line
+          add ++parasitics on command line
+   -   To further speed up simulation, consider
+          add ++aps on command line
+          add +cktpreset=sampled on command line for ADC/DAC simulation
+          add +cktpreset=pll on command line for PLL simulation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Initial condition solution time: CPU = 260 us, elapsed = 261.068 us.
+Intrinsic tran analysis time:    CPU = 15.914 ms, elapsed = 15.9159 ms.
+Total time required for tran analysis `tran': CPU = 16.342 ms, elapsed = 16.3419 ms.
+Time accumulated: CPU = 118.954 ms, elapsed = 105.052 ms.
+Peak resident memory used = 83 Mbytes.
+
+
+Aggregate audit (9:34:31 PM, Sat Jun 27, 2026):
+Time used: CPU = 124 ms, elapsed = 124 ms, util. = 100%.
+Time spent in licensing: elapsed = 47 ms, percentage of total = 37.9%.
+Peak memory used = 83.3 Mbytes.
+Simulation started at: 9:34:31 PM, Sat Jun 27, 2026, ended at: 9:34:31 PM, Sat Jun 27, 2026, with elapsed time (wall clock): 124 ms.
+spectre completes with 0 errors, 0 warnings, and 2 notices.

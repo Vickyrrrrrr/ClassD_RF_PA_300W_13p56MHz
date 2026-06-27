@@ -1,0 +1,47 @@
+// ============================================================================
+// Test RLC Circuit — Verify Spectre inductor primitive
+// ============================================================================
+// Purpose: Standalone ring-test for L=300nH, C=470pF, R=2.55 Ohm
+// Driven by a 0→10 V pulse, rise=1 ns. Expected resonant frequency:
+//
+//   f_res = 1 / (2π √(LC))
+//         = 1 / (2π √(300e-9 * 470e-12))
+//         = 1 / (2π * 3.754e-10)
+//         ≈ 13.4 MHz  (T ≈ 74.6 ns)
+//
+// If the inductor primitive is broken, L1:i will stay at 0.
+// ============================================================================
+
+simulator lang=spectre
+
+// ---------------------------------------------------------------------------
+// Pulse source  (0 → 10 V, rise = 1 ns, width = 100 ns, period = 200 ns)
+// ---------------------------------------------------------------------------
+V1 (in 0) vsource type=pulse val0=0 val1=10 rise=1n fall=1n width=100n period=200n delay=0
+
+// ---------------------------------------------------------------------------
+// Series RLC  —  in -> R1 -> lc -> L1 -> ll -> C1 -> 0
+// ---------------------------------------------------------------------------
+R1 (in lc) resistor r=2.55
+
+// Inductor: 300 nH with 10 mOhm series resistance
+// NOTE: Spectre 14.1 uses lowercase 'l' for inductance
+L1 (lc ll) inductor l=300n r=10m
+
+// Capacitor: 470 pF
+// NOTE: Spectre 14.1 uses lowercase 'c' for capacitance
+C1 (ll 0)  capacitor c=470p
+
+// ---------------------------------------------------------------------------
+// Transient analysis
+// ---------------------------------------------------------------------------
+tran tran stop=500n maxstep=0.5n method=trap skipdc=yes
+
+// ---------------------------------------------------------------------------
+// Saved signals — node voltages and branch currents
+// ---------------------------------------------------------------------------
+// Node voltages
+save in lc ll
+
+// Branch currents
+save V1:i L1:i

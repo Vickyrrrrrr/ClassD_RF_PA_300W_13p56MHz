@@ -1,0 +1,184 @@
+
+Cadence (R) Virtuoso (R) Spectre (R) Circuit Simulator
+Version 14.1.0.664.isr9 64bit -- 6 Jun 2015
+Copyright (C) 1989-2015 Cadence Design Systems, Inc. All rights reserved worldwide. Cadence, Virtuoso and Spectre are registered trademarks of Cadence Design Systems, Inc. All others are the property of their respective holders.
+
+Includes RSA BSAFE(R) Cryptographic or Security Protocol Software from RSA Security, Inc.
+
+User: vickynishad   Host: MVP   HostID: 7F0101   PID: 13209
+Memory  available: 115.8512 MB  physical: 8.1728 GB
+CPU Type: 13th Gen Intel(R) Core(TM) i5-13450HX
+          Processor PhysicalID CoreID Frequency Load
+              0         0        0     2611.2    13.0
+              1         0        0     2611.2    16.6
+              2         0        1     2611.2    12.4
+              3         0        1     2611.2    14.2
+              4         0        2     2611.2    11.9
+              5         0        2     2611.2    11.5
+              6         0        3     2611.2    11.6
+              7         0        3     2611.2    12.1
+              8         0        4     2611.2    12.1
+              9         0        4     2611.2    12.5
+             10         0        5     2611.2    11.7
+             11         0        5     2611.2    12.2
+             12         0        6     2611.2    11.8
+             13         0        6     2611.2    12.1
+             14         0        7     2611.2    11.8
+             15         0        7     2611.2    13.2
+
+
+Simulating `netlists/classd_pa.scs' on MVP at 9:10:38 PM, Sat Jun 27, 2026 (process id: 13209).
+Current working directory: /home/vickynishad/ClassD_RF_PA_300W_13p56MHz
+Command line:
+    /opt/cadence/INVS152/tools.lnx86/bin/spectre -64 -64  \
+        netlists/classd_pa.scs -format nutascii -raw  \
+        results/classd_m1first_ascii +escchars  \
+        =log=results/classd_m1first.log
+
+Loading /opt/cadence/INVS152/tools.lnx86/cmi/lib/64bit/5.0/libinfineon_sh.so ...
+Loading /opt/cadence/INVS152/tools.lnx86/cmi/lib/64bit/5.0/libphilips_o_sh.so ...
+Loading /opt/cadence/INVS152/tools.lnx86/cmi/lib/64bit/5.0/libphilips_sh.so ...
+Loading /opt/cadence/INVS152/tools.lnx86/cmi/lib/64bit/5.0/libsparam_sh.so ...
+Loading /opt/cadence/INVS152/tools.lnx86/cmi/lib/64bit/5.0/libstmodels_sh.so ...
+Reading file:  /home/vickynishad/ClassD_RF_PA_300W_13p56MHz/netlists/classd_pa.scs
+Reading file:  /opt/cadence/INVS152/tools.lnx86/spectre/etc/configs/spectre.cfg
+Reading file:  /home/vickynishad/ClassD_RF_PA_300W_13p56MHz/models/irf540.mod
+Time for NDB Parsing: CPU = 142.827 ms, elapsed = 151.655 ms.
+Time accumulated: CPU = 199 ms, elapsed = 151.661 ms.
+Peak resident memory used = 75.5 Mbytes.
+
+Reading link:  /opt/cadence/INVS152/tools.lnx86/spectre/etc/ahdl/discipline.h
+Reading file:  /opt/cadence/INVS152/tools.lnx86/spectre/etc/ahdl/disciplines.vams
+Reading link:  /opt/cadence/INVS152/tools.lnx86/spectre/etc/ahdl/constants.h
+Reading file:  /opt/cadence/INVS152/tools.lnx86/spectre/etc/ahdl/constants.vams
+
+Warning from spectre during hierarchy flattening.
+    WARNING (SFE-30): "netlists/../models/irf540.mod" 3: IRF540: `Rds' is not a valid parameter for an instance of `mos3'.  Ignored.
+    WARNING (SFE-30): "netlists/../models/irf540.mod" 3: IRF540: `Rg' is not a valid parameter for an instance of `mos3'.  Ignored.
+    WARNING (SFE-30): "netlists/../models/irf540.mod" 3: IRF540: `Tt' is not a valid parameter for an instance of `mos3'.  Ignored.
+    WARNING (SFE-30): "netlists/../models/irf540.mod" 3: IRF540: `mfg' is not a valid parameter for an instance of `mos3'.  Ignored.
+    WARNING (SFE-30): "netlists/../models/irf540.mod" 3: IRF540: `Vds' is not a valid parameter for an instance of `mos3'.  Ignored.
+        Further occurrences of this warning will be suppressed.
+
+Time for Elaboration: CPU = 22.095 ms, elapsed = 22.0959 ms.
+Time accumulated: CPU = 221.2 ms, elapsed = 173.861 ms.
+Peak resident memory used = 80.2 Mbytes.
+
+
+Warning from spectre during hierarchy flattening.
+    WARNING (CMI-2049): IRF540: Value of `vmax' should be greater than zero.  Ignored.
+
+Time for EDB Visiting: CPU = 1.21 ms, elapsed = 1.20997 ms.
+Time accumulated: CPU = 222.485 ms, elapsed = 175.145 ms.
+Peak resident memory used = 80.4 Mbytes.
+
+
+Warning from spectre during initial setup.
+    WARNING (CMI-2318): M2: Parasitic resistor `rs' has been deleted because its value of 21.34 mOhm ( R / MFactor ) was smaller than `minr'.
+    WARNING (CMI-2318): M2: Parasitic resistor `rd' has been deleted because its value of 22.52 mOhm ( R / MFactor ) was smaller than `minr'.
+    WARNING (CMI-2318): M1: Parasitic resistor `rs' has been deleted because its value of 21.34 mOhm ( R / MFactor ) was smaller than `minr'.
+    WARNING (CMI-2318): M1: Parasitic resistor `rd' has been deleted because its value of 22.52 mOhm ( R / MFactor ) was smaller than `minr'.
+    WARNING (CMI-2826): Rshunt:  No model and instance parameter is given. 
+    WARNING (CMI-2826): Rload:  No model and instance parameter is given. 
+Notice from spectre during topology check.
+    No DC path from node `rload' to ground, Gmin installed to provide path.
+
+Global user options:
+
+Circuit inventory:
+              nodes 6
+          capacitor 1     
+           inductor 1     
+               mos3 2     
+           resistor 2     
+            vsource 3     
+
+Analysis and control statement inventory:
+               tran 1     
+
+Output statements:
+             .probe 0     
+           .measure 0     
+               save 3     
+
+
+Warning from spectre during initial setup.
+    WARNING (CMI-2826): Rshunt:  No model and instance parameter is given. 
+    WARNING (CMI-2826): Rload:  No model and instance parameter is given. 
+Notice from spectre.
+    6 warnings suppressed.
+
+Time for parsing: CPU = 2.76 ms, elapsed = 2.76113 ms.
+Time accumulated: CPU = 225.321 ms, elapsed = 177.981 ms.
+Peak resident memory used = 81.6 Mbytes.
+
+~~~~~~~~~~~~~~~~~~~~~~
+Pre-Simulation Summary
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+
+***********************************************
+Transient Analysis `tran': time = (0 s -> 3 us)
+***********************************************
+
+Notice from spectre during IC analysis, during transient analysis `tran'.
+    GminDC = 1 pS is large enough to noticeably affect the DC solution.
+        dV(mid) = 2.859 V
+        Use the `gmin_check' option to eliminate or expand this report.
+    Bad pivoting is found during DC analysis. Option dc_pivot_check=yes is recommended for possible improvement of convergence.
+
+DC simulation time: CPU = 1.1 ms, elapsed = 1.10006 ms.
+Important parameter values:
+    start = 0 s
+    outputstart = 0 s
+    stop = 3 us
+    step = 3 ns
+    maxstep = 200 ps
+    ic = all
+    useprevic = no
+    skipdc = no
+    reltol = 1e-03
+    abstol(V) = 1 uV
+    abstol(I) = 1 pA
+    temp = 27 C
+    tnom = 27 C
+    tempeffects = all
+    errpreset = moderate
+    method = trap
+    lteratio = 3.5
+    relref = sigglobal
+    cmin = 0 F
+    gmin = 1 pS
+
+
+Output and IC/nodeset summary:
+                 save   4       (current)
+                 save   8       (voltage)
+
+......9......8......7......6......5......4......3......2......1......0
+Number of accepted tran steps =             16806
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Post-Transient Simulation Summary
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   -   To further speed up simulation, consider
+          add ++aps on command line
+          add +cktpreset=sampled on command line for ADC/DAC simulation
+          add +cktpreset=pll on command line for PLL simulation
+   -   Non-default settings that could significantly slow down simulation
+          maxstep = 200 ps, default 60 ns
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Initial condition solution time: CPU = 1.143 ms, elapsed = 1.14393 ms.
+Intrinsic tran analysis time:    CPU = 187.726 ms, elapsed = 187.727 ms.
+Total time required for tran analysis `tran': CPU = 189.593 ms, elapsed = 189.584 ms.
+Time accumulated: CPU = 415.303 ms, elapsed = 367.963 ms.
+Peak resident memory used = 82.4 Mbytes.
+
+
+Aggregate audit (9:10:39 PM, Sat Jun 27, 2026):
+Time used: CPU = 423 ms, elapsed = 423 ms, util. = 100%.
+Time spent in licensing: elapsed = 82.4 ms, percentage of total = 19.5%.
+Peak memory used = 82.7 Mbytes.
+Simulation started at: 9:10:38 PM, Sat Jun 27, 2026, ended at: 9:10:39 PM, Sat Jun 27, 2026, with elapsed time (wall clock): 423 ms.
+spectre completes with 0 errors, 14 warnings, and 4 notices.

@@ -1,0 +1,44 @@
+// Class-D RF Power Amplifier - 300W, 13.56 MHz
+// With power/efficiency measurements
+simulator lang=spectre
+include "/tmp/opencode/irf540.mod"
+
+// === Power Stage ===
+Vdd (vdd 0) vsource dc=72.5 type=dc
+
+// Top MOSFET Q1
+M1 (mid vg1 0 0) IRF540
+
+// Bottom MOSFET Q2
+M2 (mid vg2 vss 0) IRF540
+Vss (vss 0) vsource dc=0 type=dc
+
+// === Resonant Output Network ===
+L1 (mid lc_out) inductor L=300n
+C1 (lc_out rload) capacitor C=470p
+Rload (rload 0) resistor R=2.55
+
+// === Gate Drive ===
+// f=13.56MHz, T=73.75ns, dead-time=11.5ns
+Vg1 (vg1 0) vsource type=pulse val0=0 val1=10 period=73.75n rise=2n fall=2n width=25.375n delay=0
+Vg2 (vg2 0) vsource type=pulse val0=0 val1=10 period=73.75n rise=2n fall=2n width=25.375n delay=36.875n
+
+// === Analysis ===
+// Run long enough for steady state (~1.5us startup), then measure
+tran tran stop=3u maxstep=0.2n
+
+// === Measurements (over last 1.5us for steady-state) ===
+meas tran Pout_dc avg i(Vdd)*v(vdd) from=1.5u to=3u
+meas tran Pload avg v(rload)^2/2.55 from=1.5u to=3u
+meas tran efficiency_meas param=Pload/Pout_dc*100
+
+// Peak values
+meas tran Vmid_max max mid from=1.5u to=3u
+meas tran Vmid_min min mid from=1.5u to=3u
+meas tran I_load_pk max L1:i from=1.5u to=3u
+meas tran I_supply_avg avg Vdd:i from=1.5u to=3u
+
+// === Save signals ===
+save M1:id M2:id M1:vgs M1:vds M2:vgs M2:vds
+save mid lc_out rload vdd
+save L1:i Vdd:i

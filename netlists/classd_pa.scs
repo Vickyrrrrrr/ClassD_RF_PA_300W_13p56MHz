@@ -1,0 +1,41 @@
+// Class-D RF Power Amplifier - 300W, 13.56 MHz
+// Based on: El-Hamamsy, IEEE Trans. PE Vol.9 No.3, May 1994
+// Zero-Voltage Switching Design - IRF540 MOSFETs (Level-3 model)
+
+simulator lang=spectre
+include "../models/irf540.mod"
+
+simulator lang=spice
+.include "../models/simple_nmos.mod"
+simulator lang=spectre
+
+// === Power Stage ===
+Vdd (vdd 0) vsource dc=72.5 type=dc
+
+// Top MOSFET Q1 (drain=Vdd, gate=vg1, source=mid, body=0)
+// Using REAL IRF540 Level-3 model (includes Cbd=2.4nF, Cgs=1.15nF, Cgd=446pF)
+M1 (vdd vg1 mid 0) IRF540 w=0.94 l=2u
+
+// Bottom MOSFET Q2 (drain=mid, gate=vg2, source=0, body=0)
+M2 (mid vg2 0 0) IRF540 w=0.94 l=2u
+
+// === Resonant Output Network ===
+L1 (mid lc_out) inductor l=300n r=10m
+C1 (lc_out rload) capacitor c=470p
+Rload (rload 0) resistor r=2.55
+
+// === Gate Drive (ideal sources for simulation) ===
+// f=13.56MHz, T=73.75ns, dead-time=11.5ns
+// M1 bootstrap: Vgs = V(vg1,mid) = 10V when high (independent of mid voltage)
+// M2 direct: Vgs = V(vg2,0) = 10V when high (source=GND)
+// In hardware: use IR2110/IR2184 bootstrap gate driver + C_bs=220nF + D_bs=UF4007
+Vg1 (vg1 mid) vsource type=pulse val0=0 val1=10 period=73.75n rise=2n fall=2n width=25.375n delay=0
+Vg2 (vg2 0) vsource type=pulse val0=0 val1=10 period=73.75n rise=2n fall=2n width=25.375n delay=36.875n
+
+// === Analysis ===
+tran tran stop=1u method=trap
+
+// === Save signals ===
+save M1:id M2:id M1:vgs M1:vds M2:vgs M2:vds
+save mid lc_out rload vdd
+save L1:i Vdd:i
