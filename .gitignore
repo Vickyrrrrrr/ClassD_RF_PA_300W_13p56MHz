@@ -1,0 +1,17 @@
+# KiCad backup and lock files
+*.bak
+*.bak[0-9]*
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*~
+~*
+*.lck
+
+# KiCad local history and autosaves
+.history/
+_autosave-*
+*.autosave
+
+# Operating system artifacts
+.DS_Store
+Thumbs.db
