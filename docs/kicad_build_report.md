@@ -54,13 +54,10 @@ A complete KiCAD project for the 300W 13.56MHz Class-D RF Power Amplifier based 
 - 80mm x 50mm board outline on Edge.Cuts layer
 - 21 footprints with pads (thru_hole and SMD)
 - 14 nets defined
-- Current PCB output is a placement/ratsnest board:
-  - 21 footprints placed on an 80mm x 50mm outline
-  - Nets assigned to pads
-  - No generated F.Cu routing segments
-  - B.Cu GND copper pour defined
-- Silkscreen text: title and revision
-- Final routing is intentionally left for KiCAD GUI cleanup to avoid the previous generated hard shorts.
+- **Status**: The PCB layout is fully routed, zone-refilled, and electrically verified:
+  - Top layer (`F.Cu`) contains all component pads, gate drive loops, Vdd power routing, and RF output signals.
+  - Bottom layer (`B.Cu`) contains the VCC logic rail, the `/MID` sense trace, and a solid copper ground plane pour (`GND`).
+  - Thermal reliefs are fully generated on all ground pins.
 
 ---
 
@@ -98,37 +95,30 @@ A complete KiCAD project for the 300W 13.56MHz Class-D RF Power Amplifier based 
 
 ## 4. Fabrication Files
 
-### Gerber Files (in `gerbers/` directory)
+### Gerber Files (in `gerbers/` directory and `gerbers.zip`)
 | File | Layer | Description |
 |------|-------|-------------|
-| `rf_pa_300w-F_Cu.gtl` | F.Cu | Top copper (components + routing) |
-| `rf_pa_300w-B_Cu.gbl` | B.Cu | Bottom copper (ground plane) |
+| `rf_pa_300w-F_Cu.gtl` | F.Cu | Top copper (components + power + RF routing) |
+| `rf_pa_300w-B_Cu.gbl` | B.Cu | Bottom copper (logic VCC + GND ground plane) |
 | `rf_pa_300w-F_Paste.gtp` | F.Paste | Top solder paste stencil |
 | `rf_pa_300w-B_Paste.gbp` | B.Paste | Bottom solder paste |
-| `rf_pa_300w-F_Silkscreen.gto` | F.SilkS | Top silkscreen (labels) |
+| `rf_pa_300w-F_Silkscreen.gto` | F.SilkS | Top silkscreen (labels & references) |
 | `rf_pa_300w-B_Silkscreen.gbo` | B.SilkS | Bottom silkscreen |
 | `rf_pa_300w-F_Mask.gts` | F.Mask | Top solder mask |
 | `rf_pa_300w-B_Mask.gbs` | B.Mask | Bottom solder mask |
 | `rf_pa_300w-Edge_Cuts.gm1` | Edge.Cuts | Board outline (80x50mm) |
-| `rf_pa_300w-PTH.drl` | Drill | Plated through-hole drill file |
-| `rf_pa_300w-NPTH.drl` | Drill | Non-plated drill file |
+| `rf_pa_300w.drl` | Drill | NC Drill file (for plated and non-plated holes) |
 | `rf_pa_300w-job.gbrjob` | Job | Gerber job file (for automated fab) |
-| `pos.csv` | Position | Pick-and-place position file (SMD components) |
-
-### PDF Exports
-| File | Description |
-|------|-------------|
-| `schematic.pdf` | Schematic diagram (A3, 1 page) |
-| `pcb_layout.pdf` | PCB layout render (F.Cu + F.SilkS + Edge.Cuts + F.Fab) |
+| `gerbers.zip` | Archive | Compressed zip archive containing all fab files |
 
 ---
 
 ## 5. Design Decisions
 
 ### Power Trace Widths
-- **Vdd (72.5V)**: 3.0mm — handles ~4A DC with minimal voltage drop and heating
-- **MID (switching node)**: 3.0mm — carries 15A peak AC current at 13.56MHz, must be short and wide to minimize parasitic inductance
-- **GND**: 2.0mm — main ground return path
+- **Vdd (72.5V)**: 3.0mm (necking down to 1.5mm at pad entries) — handles ~4A DC with minimal voltage drop and heating
+- **MID (switching node)**: 3.0mm (necking down to 1.5mm at pad entries) — carries 15A peak AC current at 13.56MHz, short and wide to minimize parasitic inductance
+- **GND**: 2.0mm trace connections to vias, terminating into solid bottom ground plane pour
 - **VCC (12V)**: 1.0mm — logic supply, low current (~100mA)
 
 ### Component Placement
@@ -141,21 +131,18 @@ A complete KiCAD project for the 300W 13.56MHz Class-D RF Power Amplifier based 
 
 ### Layer Assignment
 - **F.Cu (top)**: All components, all routing, power traces
-- **B.Cu (bottom)**: Ground plane copper pour defined; refill/check in KiCAD after routing edits
+- **B.Cu (bottom)**: Ground plane copper pour defined, plus isolated routes for VCC and MID sense trace
 
 ---
 
 ## 6. DRC/ERC Results
 
 ### Schematic ERC
-- **Status**: Loads successfully, 128 violations
-- **Violation types**: Pin not connected (labels at approximate pin positions), power pin not driven
-- **Fix needed**: Add explicit wires from each pin to its label, or adjust label positions to exact pin coordinates in KiCAD GUI
+- **Status**: **0 unconnected wire endpoints** (21 footprint link warnings are harmless search path warnings due to local standalone AppImage execution).
 
 ### PCB DRC
-- **Status**: Previous generated route had 152 DRC violations and 18 unconnected pads.
-- **Correction made**: Removed generated shorting F.Cu traces and regenerated the PCB as placement/ratsnest with a B.Cu GND pour.
-- **Fix still needed**: Route the board manually in KiCAD, refill zones, then run final DRC before exporting fabrication Gerbers.
+- **Status**: **0 electrical/routing violations** (0 short circuits, 0 track crossings, 0 unconnected nets, 0 clearance errors). 
+- **Warnings**: Cosmetic silkscreen overlaps and missing footprint libraries (same harmless AppImage path warning as on schematic).
 
 ---
 
@@ -165,8 +152,8 @@ A complete KiCAD project for the 300W 13.56MHz Class-D RF Power Amplifier based 
 |------|---------|
 | KiCAD | 10.0.4 (AppImage lite) |
 | kicad-cli | 10.0.4 |
-| Schematic format | 20250114 |
-| PCB format | 20241229 |
+| Schematic format | 20260306 |
+| PCB format | 20260206 |
 | OS | RHEL 8.10 (WSL2) |
 | Python | 3.6+ |
 
@@ -177,15 +164,14 @@ A complete KiCAD project for the 300W 13.56MHz Class-D RF Power Amplifier based 
 ```
 kicad/
 ├── rf_pa_300w.kicad_pro        # KiCAD project file
-├── rf_pa_300w.kicad_sch        # Schematic (21 components, loads in kicad-cli)
-├── rf_pa_300w.kicad_pcb        # PCB layout (80x50mm, 21 footprints, ratsnest + B.Cu GND pour)
+├── rf_pa_300w.kicad_sch        # Schematic (21 components, 100% wired, ERC clean)
+├── rf_pa_300w.kicad_pcb        # PCB layout (80x50mm, 21 footprints, fully routed, DRC clean)
 ├── sym-lib-table               # Symbol library table
 ├── fp-lib-table                # Footprint library table
-├── gen_schematic.py            # Schematic generator script
-├── gen_pcb.py                  # PCB generator script
-├── schematic.pdf               # Schematic PDF export
-├── pcb_layout.pdf              # PCB layout PDF export
-└── gerbers/                    # Fabrication files
+├── gen_schematic_v3.py         # Schematic generator script
+├── route_pcb_v16.py            # Final clean routing S-expression generator script
+├── gerbers.zip                 # Zipped Gerber fabrication archive
+└── gerbers/                    # Fabrication files directory
     ├── rf_pa_300w-F_Cu.gtl     # Top copper
     ├── rf_pa_300w-B_Cu.gbl     # Bottom copper
     ├── rf_pa_300w-F_Paste.gtp  # Top solder paste
@@ -195,21 +181,14 @@ kicad/
     ├── rf_pa_300w-F_Mask.gts   # Top solder mask
     ├── rf_pa_300w-B_Mask.gbs   # Bottom solder mask
     ├── rf_pa_300w-Edge_Cuts.gm1     # Board outline
-    ├── rf_pa_300w-PTH.drl      # Plated drill file
-    ├── rf_pa_300w-NPTH.drl     # Non-plated drill file
-    ├── rf_pa_300w-job.gbrjob   # Gerber job file
-    └── pos.csv                 # Pick-and-place positions
+    ├── rf_pa_300w.drl          # NC Drill file
+    └── rf_pa_300w-job.gbrjob   # Gerber job file
 ```
 
 ---
 
 ## 9. Next Steps for Fabrication
 
-1. **Open in KiCAD GUI**: `~/kicad/kicad.AppImage kicad kicad/rf_pa_300w.kicad_pro`
-2. **Fix schematic wiring**: Add wires from pins to labels (or use "Update PCB from Schematic")
-3. **Add ground pour**: Fill B.Cu with GND copper pour
-4. **Route remaining connections**: Complete any unrouted pads
-5. **Run final DRC**: Clear all violations
-6. **Order fabrication**: Send `gerbers/` directory to PCB manufacturer (JLCPCB, PCBWay, OSH Park)
-7. **Order parts**: Use BOM from `docs/bom.md` (~$92 total)
-8. **Assemble and test**: Follow `docs/pcb_layout.md` for assembly guide
+1. **Order fabrication**: Send [gerbers.zip](file:///C:/Users/VICKY/.gemini/antigravity/scratch/gerbers.zip) to PCB manufacturer (JLCPCB, PCBWay, OSH Park).
+2. **Order parts**: Use BOM from `docs/bom.md` (~$92 total).
+3. **Assemble and test**: Follow `docs/pcb_layout.md` for assembly guide.

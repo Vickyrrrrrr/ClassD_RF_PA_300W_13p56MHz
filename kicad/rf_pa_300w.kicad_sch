@@ -1877,16 +1877,7 @@
 		)
 		(uuid "55371422-a3d6-45a3-8a4f-0ea5ce8cb339")
 	)
-	(wire
-		(pts
-			(xy 27.46 95) (xy 30 95)
-		)
-		(stroke
-			(width 0)
-			(type solid)
-		)
-		(uuid "6776ec99-295d-44db-b816-7687e1702616")
-	)
+
 	(wire
 		(pts
 			(xy 376.19 50) (xy 380 50)

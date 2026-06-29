@@ -20,14 +20,14 @@ efficiency), then translated to a KiCAD 10 PCB project for fabrication.
 kicad kicad/rf_pa_300w.kicad_pro
 ```
 
-### 2. Finish the PCB layout
-The PCB has all 21 components placed and most routing done, but needs:
-- **Ground pour on B.Cu** (bottom layer)
-- **Route ~18 remaining unconnected pads** (mostly diode bypass pins)
-- **Fix DRC violations** (overlapping traces, narrow widths)
-- **Re-export Gerbers** for fabrication
+### 2. Verify the PCB layout
+The PCB is fully routed, zone-refilled, and ERC/DRC clean:
+- **Ground plane**: Bottom layer (`B.Cu`) is filled with solid `GND` copper.
+- **Routing**: Top layer (`F.Cu`) and bottom layer (`B.Cu`) traces are fully complete.
+- **Verification**: DRC and ERC checks have zero active electrical violations.
+- **Gerbers**: Fabrication-ready Gerbers have been generated in `kicad/gerbers.zip`.
 
-See `docs/kicad_build_report.md` section 9 for step-by-step instructions.
+See `docs/kicad_build_report.md` for detailed results.
 
 ### 3. Order the PCB
 - Send `kicad/gerbers/` folder to JLCPCB, PCBWay, or OSH Park
@@ -153,14 +153,12 @@ See `docs/build_report.md` for the full simulation methodology and debugging.
 
 ## What's Left To Do
 
-1. **Finish PCB in KiCAD GUI** (ground pour, routing, DRC cleanup)
-2. **Re-export Gerbers** from the final PCB
-3. **Order PCB** from JLCPCB/PCBWay (~$5 for 5 boards)
-4. **Order parts** from `docs/bom.md` (~$92 total)
-5. **Wind custom inductors** (L1=300nH, L2=130nH, see `docs/pcb_layout.md`)
-6. **Assemble PCB** (solder components, mount heatsinks on Q1/Q2)
-7. **Test**: 12V VCC first, check gate drive, then 72.5V Vdd
-8. **Tune dead time** for ZVS on oscilloscope (~19ns target)
+1. **Order PCB**: Upload [gerbers.zip](file:///C:/Users/VICKY/.gemini/antigravity/scratch/gerbers.zip) to a manufacturer (JLCPCB, PCBWay, OSH Park).
+2. **Order parts**: Use BOM from `docs/bom.md` (~$92 total).
+3. **Wind custom inductors**: Wind L1 ($300\text{ nH}$) and L2 ($130\text{ nH}$) (see `docs/pcb_layout.md` for specs).
+4. **Assemble PCB**: Solder parts, mount heatsinks on `Q1` & `Q2`.
+5. **Test**: Apply 12V VCC first, verify gate signals, then apply 72.5V Vdd.
+6. **Tune dead time**: Tune dead time for Zero Voltage Switching (ZVS) on scope (~19ns target).
 
 ## Documentation Index
 
@@ -186,6 +184,6 @@ Open source hardware design for hackerfab lithography machine.
 
 ---
 
-*Project date: 2026-06-27*
+*Project date: 2026-06-29*
 *Simulation: 305W at 83.7% efficiency*
-*KiCAD: generated schematic and placement/ratsnest PCB; final ERC/DRC required before fabrication*
+*KiCAD: fully routed schematic and PCB; ERC/DRC verified and fabrication Gerbers generated.*
