@@ -1,5 +1,7 @@
 # Gate Driver Specification: 300W 13.56MHz Class-D RF Power Amplifier
 
+*Verified and confirmed correct on 2026-06-29 for routed PCB.*
+
 ## 1. Requirements
 
 The IRF540 MOSFETs require:

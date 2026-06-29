@@ -1,6 +1,8 @@
 # Bill of Materials: 300W 13.56MHz Class-D RF Power Amplifier
 
-*Updated 2026-06-27 to match KiCAD schematic reference designators.*
+*Verified and confirmed correct on 2026-06-29 for routed PCB.*
+
+*Updated 2026-06-29 to match KiCAD schematic reference designators.*
 
 ## Power Stage
 

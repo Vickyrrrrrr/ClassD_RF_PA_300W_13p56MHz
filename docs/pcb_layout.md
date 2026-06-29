@@ -1,6 +1,8 @@
 # PCB Layout Guide: 300W 13.56MHz Class-D RF Power Amplifier
 
-## Board Specifications (UPDATED 2026-06-27)
+*Verified and confirmed correct on 2026-06-29 for routed PCB.*
+
+## Board Specifications (UPDATED 2026-06-29)
 
 | Parameter | Value |
 |-----------|-------|
