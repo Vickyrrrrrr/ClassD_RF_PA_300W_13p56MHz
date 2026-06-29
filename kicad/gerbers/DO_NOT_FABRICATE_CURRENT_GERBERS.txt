@@ -1,6 +1,0 @@
-Do not send these Gerbers to fabrication.
-
-They were exported before the PCB generator was corrected and may contain the
-old shorting route geometry. Open kicad/rf_pa_300w.kicad_pro in KiCad, finish
-routing, refill zones, run ERC/DRC, and export fresh Gerbers only after the
-checks are clean.
