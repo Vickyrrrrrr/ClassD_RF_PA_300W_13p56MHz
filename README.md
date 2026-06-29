@@ -2,6 +2,14 @@
 
 For hackerfab lithography machine RF plasma source.
 
+## Design Renders
+
+### Schematic
+![Schematic](docs/schematic.svg)
+
+### PCB Layout
+![PCB Layout](docs/pcb_layout.svg)
+
 ## What This Is
 
 A 300W, 13.56MHz Class-D RF power amplifier based on the El-Hamamsy half-bridge
